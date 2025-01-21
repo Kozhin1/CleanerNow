@@ -13,4 +13,4 @@ name = "cleanernow"
 # Cloudflare Pages specific configuration
 [pages]
 framework = "vite"
-build_output_directory = "dist"
+pages_build_output_dir = "dist"
