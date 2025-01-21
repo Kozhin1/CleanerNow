@@ -6,6 +6,7 @@ type FormData = {
   email: string;
   password: string;
   fullName?: string;
+  isCleaner?: boolean;
 };
 
 export default function AuthModal() {
@@ -23,7 +24,7 @@ export default function AuthModal() {
   const onSubmit = async (data: FormData) => {
     try {
       if (isSignUp) {
-        await signUp(data.email, data.password, data.fullName || '');
+        await signUp(data.email, data.password, data.fullName || '', data.isCleaner);
       } else {
         await signIn(data.email, data.password);
       }
@@ -69,6 +70,19 @@ export default function AuthModal() {
                 <p className="mt-1 text-sm text-red-600">Email is required</p>
               )}
             </div>
+
+            {isSignUp && (
+              <div className="mb-4">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    {...register('isCleaner')}
+                    className="rounded border-gray-300 text-primary focus:ring-primary"
+                  />
+                  <span className="text-sm font-medium text-gray-700">Sign up as a cleaner</span>
+                </label>
+              </div>
+            )}
 
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">Password</label>

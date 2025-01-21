@@ -58,8 +58,13 @@ CREATE POLICY "Public can view cleaner profiles"
 CREATE OR REPLACE FUNCTION handle_new_user()
 RETURNS trigger AS $$
 BEGIN
-  INSERT INTO public.profiles (id, email, full_name)
-  VALUES (new.id, new.email, new.raw_user_meta_data->>'full_name');
+  INSERT INTO public.profiles (id, email, full_name, is_cleaner)
+  VALUES (
+    new.id,
+    new.email,
+    new.raw_user_meta_data->>'full_name',
+    COALESCE((new.raw_user_meta_data->>'is_cleaner')::boolean, false)
+  );
   RETURN new;
 END;
 $$ LANGUAGE plpgsql SECURITY definer;
