@@ -1,12 +1,16 @@
-name = "cleanernow"
-compatibility_date = "2024-01-20"
-
 [build]
 command = "npm run build"
-output_directory = "dist"
+
+[build.upload]
+format = "directory"
 
 [site]
 bucket = "./dist"
 
-# Required for Cloudflare Pages
-pages_build_output_dir = "dist"
+[env.production]
+name = "cleanernow"
+
+# Cloudflare Pages specific configuration
+[pages]
+framework = "vite"
+build_output_directory = "dist"
