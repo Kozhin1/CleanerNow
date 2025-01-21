@@ -8,6 +8,10 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, signOut } = useAuth();
 
+  const handleSignInClick = () => {
+    window.dispatchEvent(new Event('open-auth-modal'));
+  };
+
   return (
     <nav className="bg-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,10 +44,13 @@ export default function Navbar() {
                 </button>
               </>
             ) : (
-              <Link to="/login" className="text-gray-600 hover:text-primary px-3 py-2">
+              <button
+                onClick={handleSignInClick}
+                className="text-gray-600 hover:text-primary px-3 py-2"
+              >
                 <User className="h-5 w-5 inline-block mr-1" />
                 Sign In
-              </Link>
+              </button>
             )}
           </div>
 
@@ -94,13 +101,13 @@ export default function Navbar() {
                   </button>
                 </>
               ) : (
-                <Link
-                  to="/login"
+                <button
+                  onClick={handleSignInClick}
                   className="block text-gray-600 hover:text-primary px-3 py-2"
                 >
                   <User className="h-5 w-5 inline-block mr-1" />
                   Sign In
-                </Link>
+                </button>
               )}
             </div>
           </div>

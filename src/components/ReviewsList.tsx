@@ -1,10 +1,6 @@
-import React from 'react';
+import { Database } from '@/lib/database.types';
 
-type Review = {
-  id: string;
-  rating: number;
-  comment: string;
-  created_at: string;
+type Review = Database['public']['Tables']['reviews']['Row'] & {
   reviewer: {
     full_name: string;
   };
@@ -47,7 +43,9 @@ export default function ReviewsList({ reviews }: ReviewsListProps) {
               {new Date(review.created_at).toLocaleDateString()}
             </span>
           </div>
-          <p className="mt-2 text-gray-700">{review.comment}</p>
+          {review.comment && (
+            <p className="mt-2 text-gray-700">{review.comment}</p>
+          )}
         </div>
       ))}
     </div>

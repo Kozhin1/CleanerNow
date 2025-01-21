@@ -120,7 +120,7 @@ export default function BookCleaner() {
               {...register('service_type', { required: true })}
               className="mt-1 block w-full rounded-md border-gray-300"
             >
-              {cleaner.cleaner_profile.services_offered.map((service) => (
+              {cleaner.cleaner_profile.services_offered.map((service: string) => (
                 <option key={service} value={service}>
                   {service}
                 </option>

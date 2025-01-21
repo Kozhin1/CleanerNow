@@ -1,10 +1,16 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/lib/supabase';
 import { Star, MapPin, Clock, Award } from 'lucide-react';
 import ReviewsList from '@/components/ReviewsList';
 import { Link } from 'react-router-dom';
+import { Database } from '@/lib/database.types';
+
+type Review = Database['public']['Tables']['reviews']['Row'] & {
+  reviewer: {
+    full_name: string;
+  };
+};
 
 export default function CleanerProfile() {
   const { id } = useParams();
@@ -26,7 +32,7 @@ export default function CleanerProfile() {
     },
   });
 
-  const { data: reviews, isLoading: isLoadingReviews } = useQuery({
+  const { data: reviews, isLoading: isLoadingReviews } = useQuery<Review[]>({
     queryKey: ['cleaner-reviews', id],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -70,7 +76,7 @@ export default function CleanerProfile() {
                   <Star className="h-5 w-5 text-yellow-400" />
                   <span className="ml-1 text-lg">
                     {reviews?.length ? (
-                      reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
+                      reviews.reduce((acc: number, review: Review) => acc + review.rating, 0) / reviews.length
                     ).toFixed(1) : 'No reviews'}
                   </span>
                 </div>
@@ -108,7 +114,7 @@ export default function CleanerProfile() {
                 <div>
                   <h3 className="font-medium mb-2">Services Offered:</h3>
                   <div className="flex flex-wrap gap-2">
-                    {cleaner.cleaner_profile.services_offered.map((service) => (
+                    {cleaner.cleaner_profile.services_offered.map((service: string) => (
                       <span
                         key={service}
                         className="px-3 py-1 bg-primary-50 text-primary rounded-full text-sm"
