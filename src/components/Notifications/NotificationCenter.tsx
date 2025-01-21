@@ -1,5 +1,4 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 import { Bell } from 'lucide-react';
@@ -35,7 +34,7 @@ export default function NotificationCenter() {
     enabled: !!user,
   });
 
-  const unreadCount = notifications?.filter((n) => !n.read).length ?? 0;
+  const unreadCount = notifications?.filter((n: Notification) => !n.read).length ?? 0;
 
   const markAsRead = async (notificationId: string) => {
     const { error } = await supabase
@@ -68,7 +67,7 @@ export default function NotificationCenter() {
         >
           <h3 className="text-lg font-semibold mb-4">Notifications</h3>
           <div className="space-y-4 max-h-96 overflow-y-auto">
-            {notifications?.map((notification) => (
+            {notifications?.map((notification: Notification) => (
               <div
                 key={notification.id}
                 className={`p-3 rounded-lg ${

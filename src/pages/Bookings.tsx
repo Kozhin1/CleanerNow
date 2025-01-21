@@ -1,13 +1,13 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/lib/supabase';
-import ReviewForm from '@/components/ReviewForm';
-import ChatWindow from '@/components/Chat/ChatWindow';
-import DisputeForm from '@/components/Disputes/DisputeForm';
-import DisputesList from '@/components/Disputes/DisputesList';
-import LocationTracker from '@/components/Tracking/LocationTracker';
-import CleaningChecklist from '@/components/Cleaning/CleaningChecklist';
+import { useAuth } from '../contexts/AuthContext';
+import { supabase } from '../lib/supabase';
+import ReviewForm from '../components/ReviewForm';
+import { ChatWindow } from '../components/Chat/ChatWindow';
+import DisputeForm from '../components/Disputes/DisputeForm';
+import DisputesList from '../components/Disputes/DisputesList';
+import LocationTracker from '../components/Tracking/LocationTracker';
+import CleaningChecklist from '../components/Cleaning/CleaningChecklist';
 import { toast } from 'react-hot-toast';
 
 export default function Bookings() {

@@ -1,4 +1,4 @@
-import { Spray } from 'lucide-react';
+import { Broom } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1">
             <Link to="/" className="flex items-center">
-              <Spray className="h-8 w-8 text-primary" />
+              <Broom className="h-8 w-8 text-primary" />
               <span className="ml-2 text-xl font-bold text-primary">CleanerNow</span>
             </Link>
             <p className="mt-4 text-gray-600">
